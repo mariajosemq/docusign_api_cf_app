@@ -1,0 +1,6 @@
+---
+applications:
+- name: docusign_app
+  memory: 64M
+  command: python docusign_app.py
+  buildpack: https://github.com/cloudfoundry/buildpack-python.git
