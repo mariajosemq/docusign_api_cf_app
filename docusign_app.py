@@ -20,11 +20,11 @@ def envelopes():
 	payload_1 = {
 
 	    "templateId": getTemplateData['templateId'],
-	    "emailSubject": "Envio de Docusign DC3",
+	    "emailSubject": "Por favor revisar y firmar el formato DC3 del curso " + getTemplateData['courseName'],
 	    "status": "sent",
 	    "templateRoles": [
 	        {
-	            "email": getTemplateData['email'],
+	            "email": getTemplateData['emailAccount'],
 	            "name": getTemplateData['employeeFullName'],
 	            "roleName": "Signer",
 	            "tabs": {
@@ -276,11 +276,13 @@ def envelopes():
 	#payload to "request" the generated document url
 	payload_2 = {
 		"authenticationMethod": "None",
-		"email": getTemplateData['email'],
+		"email": getTemplateData['emailAccount'],
 		"recipientId": "1",
-		"returnUrl": "https://demo.docusign.net/restapi/v2/accounts/{}/envelopes/{}".format(getTemplateData['accountId'],response.json()['envelopeId']),
-		"userName": getTemplateData['email']
+		"returnUrl": "https://sapui5.hana.ondemand.com/",
+		"userName": getTemplateData['emailAccount']
 	}
+
+	print(payload_2)
 
 	response_2 = requests.request("POST", url_2, headers=headers, data = json.dumps(payload_2))
 
